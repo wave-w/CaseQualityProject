@@ -1,0 +1,62 @@
+{
+    "editor.fontSize": 19,
+    "editor.tabSize": 2, // 重新设定tabsize
+    // eslint配置项，保存时自动修复错误
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    // 默认使用prettier格式化支持的文件
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    // 指定 *.vue 文件的格式化工具为vetur，防止和prettier冲突
+    "[vue]": {
+      "editor.defaultFormatter": "octref.vetur"
+    },
+    // 指定 *.js 文件的格式化工具为vscode自带，以符合ESLint规范
+    "[javascript]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "editor.mouseWheelZoom": true, //Ctrl+滚轮实现代码的缩放
+    "vetur.format.defaultFormatter.html": "js-beautify-html",
+    "vetur.format.defaultFormatter.js": "vscode-typescript",
+    "vetur.format.defaultFormatterOptions": {
+      "js-beautify-html": {
+        // - auto: 仅在超出行长度时才对属性进行换行。
+        // - force: 对除第一个属性外的其他每个属性进行换行。
+        // - force-aligned: 对除第一个属性外的其他每个属性进行换行，并保持对齐。
+        // - force-expand-multiline: 对每个属性进行换行。
+        // - aligned-multiple: 当超出折行长度时，将属性进行垂直对齐。
+        "wrap_attributes": "auto", // #vue组件中html代码格式化样式
+        "wrap_line_length": 80,
+        "end_with_newline": false
+      },
+      "prettier": {
+        //去掉代码结尾分号
+        "semi": false,
+        //使用eslint的代码格式进行校验
+        "eslintIntegration": true,
+        //采用单引号
+        "singleQuote": true,
+        "wrap_attributes": "auto",
+        "indent_size": 4
+      }
+    },
+    "files.associations": {
+      "*.ftl": "html",
+      "*.vue": "vue",
+      "*.wpy": "vue",
+      "*.scss": "scss"
+    },
+    "breadcrumbs.enabled": true, // 文件路径面包屑
+    "workbench.iconTheme": "vscode-icons", // 文件图标
+    "window.zoomLevel": 0, // 整体放大、缩小 VS Code 用户界面
+    "tabnine.experimentalAutoImports": true,
+    // Vetur支持custom block中的语法突出显示
+    // md | yaml | json | php | graphql
+    "vetur.grammar.customBlocks": {
+      "docs": "md",
+      "i18n": "json"
+    },
+    "prettier.jsxSingleQuote": true, // 在jsx中使用单引号代替双引号
+    "tslint.autoFixOnSave": false
+  }
+  
