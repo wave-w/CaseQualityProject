@@ -112,7 +112,14 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .card {
+  height: 800px;
   margin: 20px;
+  :deep(.el-card__body){
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 750px;
+  }
   .bottom {
     display: flex;
     justify-content: space-between;
