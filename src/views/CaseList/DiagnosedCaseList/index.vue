@@ -47,7 +47,6 @@ export default defineComponent({
         diagnosedCaseListParams.ageSort,
         diagnosedCaseListParams.dateSort,
       ).then((res) => {
-        formatDate(res.data.data[0].patientBirthDate);
         patientListData.list = res.data.data.map((item) => ({
           ...item,
           patientBirthDate: formatDate(item.patientBirthDate),

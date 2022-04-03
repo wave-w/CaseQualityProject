@@ -2,7 +2,7 @@
   <div>
     <el-table
       :data="tableData"
-      max-height="650"
+      max-height="500"
       @row-dblclick="$emit('row-click', $event)"
       @sort-change="$emit('sort-change', $event)"
     >
