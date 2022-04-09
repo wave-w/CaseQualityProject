@@ -49,7 +49,7 @@ export default defineComponent({
       ).then((res) => {
         patientListData.list = res.data.data.map((item) => ({
           ...item,
-          patientBirthDate: formatDate(item.patientBirthDate),
+          patientBirthDate: formatDate(item.patientBirthDate).slice(0, 10),
           inspectionDate: formatDate(item.inspectionDate),
         }));
         total.value = res.data.total;

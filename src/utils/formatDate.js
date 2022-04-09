@@ -1,5 +1,5 @@
 export default function formatDate(time) {
-  const date = new Date(time);
+  const date = new Date(Number(time));
   const YY = date.getFullYear();
   const MM = (date.getMonth() + 1).toString().padStart(2, '0');
   const DD = date.getDate().toString().padStart(2, '0');
