@@ -15,7 +15,7 @@ const routes = [
       {
         path: '/index',
         name: 'Index',
-        component: () => import('../views/Index/index.vue'),
+        component: () => import('../views/RecordImport/index.vue'),
       },
       {
         path: '/diagnosedCaseList',
