@@ -12,6 +12,9 @@ const global = {
     personal: 'Personal Center',
     logout: 'logout',
     logoutConfirm: 'Are you sure you want to log out?',
+    man: 'man',
+    feman: 'feman',
+    unknow: 'unknow',
   },
   zh: {
     switchLanguage: '切换语言',
@@ -26,6 +29,9 @@ const global = {
     personal: '个人中心',
     logout: '退出登录',
     logoutConfirm: '您确定要退出登录?',
+    man: '男',
+    feman: '女',
+    unknow: '未知',
   },
 };
 

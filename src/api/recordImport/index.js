@@ -7,6 +7,12 @@ export function getChainRegions() {
   });
 }
 
-export function get() {
-
+export function addRecord(patientData) {
+  return request({
+    url: '/addrecord',
+    method: 'POST',
+    params: {
+      patientData,
+    },
+  });
 }

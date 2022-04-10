@@ -301,7 +301,6 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-@import '../../assets/css/image_iconfont.css';
 .viewer_box {
   width: 750px;
   height: 650px;
