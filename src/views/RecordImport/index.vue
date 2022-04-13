@@ -240,13 +240,13 @@ export default defineComponent({
         if (res.data.success) {
           addRecord(patientData).then((data) => {
             if (data.data.success) {
+              dialogVisible.value = false;
+              isDisabledUoload.value = false;
+              fromRef.value.resetFields();
               ElMessage({
                 message: t('recordImport.uploadSuccess'),
                 type: 'success',
               });
-              dialogVisible.value = false;
-              isDisabledUoload.value = false;
-              fromRef.value.resetFields();
             }
           });
         }
@@ -263,8 +263,9 @@ export default defineComponent({
       fileList.value = uploadFiles;
     };
 
-    const beforeClose = () => {
+    const beforeClose = (done) => {
       fileList.value = [];
+      done();
     };
     toGetRegions();
 
