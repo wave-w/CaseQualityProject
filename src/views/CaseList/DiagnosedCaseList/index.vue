@@ -1,7 +1,7 @@
 <template>
   <div>
     <case-list
-      :patient-list-data="patientListData.list"
+      :patient-list-data="patientListData"
       :total="total"
       @to-detail="toDetail"
       @sort-change="sortChange"
@@ -14,9 +14,10 @@
 
 <script>
 import {
-  defineComponent, onMounted, reactive, ref,
+  defineComponent, onMounted, ref,
 } from 'vue';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import caseList from '../../../components/CaseList/index.vue';
 import { getDiagnosedCaseList } from '../../../api/patientList/index';
 import formatDate from '../../../utils/formatDate';
@@ -28,8 +29,8 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter();
-
-    const patientListData = reactive({});
+    const { t } = useI18n();
+    const patientListData = ref([]);
     const total = ref(0);
     const diagnosedCaseListParams = {
       name: '',
@@ -47,8 +48,9 @@ export default defineComponent({
         diagnosedCaseListParams.ageSort,
         diagnosedCaseListParams.dateSort,
       ).then((res) => {
-        patientListData.list = res.data.data.map((item) => ({
+        patientListData.value = res.data.data.map((item) => ({
           ...item,
+          patientSex: item.patientSex === 'man' ? t('global.man') : t('global.feman'),
           patientBirthDate: formatDate(item.patientBirthDate).slice(0, 10),
           inspectionDate: formatDate(item.inspectionDate),
         }));
