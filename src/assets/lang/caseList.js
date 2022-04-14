@@ -10,6 +10,8 @@ const caseList = {
     inspectionDate: '检查日期',
     patientBirthDate: '出生日期',
     inspectionDoctor: '检查医生',
+    ultrasonic_diagnosis: '超声诊断',
+    ultrasonic_findings: '超声所见',
   },
   en: {
     inspectionNum: 'InspectionNum',
@@ -22,6 +24,8 @@ const caseList = {
     inspectionDate: 'InsDate',
     patientBirthDate: 'BirthDate',
     inspectionDoctor: 'InspectionDoctor',
+    ultrasonic_diagnosis: 'Ultrasonic Diagnosis',
+    ultrasonic_findings: 'Ultrasonic Findings',
   },
 };
 

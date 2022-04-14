@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { defineComponent, reactive, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import MyTable from '../MyTable/index.vue';
 import MyPagination from '../MyPagination/index.vue';
@@ -52,7 +52,7 @@ export default defineComponent({
     const { t } = useI18n();
 
     const searchName = ref('');
-    const tableColumn = reactive([
+    const tableColumn = ref([
       {
         prop: 'inspectionNum',
         label: t('caseList.inspectionNum'),
@@ -103,6 +103,7 @@ export default defineComponent({
         label: t('caseList.nativePlace'),
       },
     ]);
+
     return {
       tableColumn, searchName,
     };
