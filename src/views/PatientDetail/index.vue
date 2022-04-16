@@ -94,8 +94,7 @@ export default defineComponent({
     ]);
     const patientData = ref({});
     function toGetDiagnosedPatientDetail() {
-      getDiagnosedPatientDetail(route.query.id).then((res) => {
-        console.log(res);
+      getDiagnosedPatientDetail(route.params.id, route.params.type).then((res) => {
         patientData.value = {
           ...res.data,
           patientSex: res.data.patientSex === 'man' ? t('global.man') : t('global.feman'),

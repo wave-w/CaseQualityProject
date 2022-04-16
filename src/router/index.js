@@ -28,7 +28,7 @@ const routes = [
         component: () => import('../views/CaseList/NotDiagnosedCaseList/index.vue'),
       },
       {
-        path: '/patientDetail',
+        path: '/patientDetail/:type/:id',
         name: 'patientDetail',
         component: () => import('../views/PatientDetail/index.vue'),
       },

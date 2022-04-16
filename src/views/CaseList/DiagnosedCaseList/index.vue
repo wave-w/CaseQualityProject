@@ -63,15 +63,7 @@ export default defineComponent({
     });
 
     function toDetail(row) {
-      router.push({
-        name: 'patientDetail',
-        query: {
-          id: row.inspectionNum,
-        },
-        params: {
-          type: 'DiagnosedCaseList',
-        },
-      });
+      router.push(`/patientDetail/diagnosedCaseList/${row.inspectionNum}`);
     }
     function currentChange(pageNum) {
       diagnosedCaseListParams.pageNum = pageNum;

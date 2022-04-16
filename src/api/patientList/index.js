@@ -20,12 +20,13 @@ export function getNotDiagnosedCaseList(name, pageNum, pageSize, ageSort, dateSo
   });
 }
 
-export function getDiagnosedPatientDetail(id) {
+export function getDiagnosedPatientDetail(id, type) {
   return request({
     url: '/diagnosedPatientDetail',
     method: 'POST',
     params: {
       id,
+      type,
     },
   });
 }
