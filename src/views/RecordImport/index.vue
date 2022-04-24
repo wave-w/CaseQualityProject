@@ -1,8 +1,5 @@
 <template>
   <el-card shadow class="card">
-    <div style="color: #000;backgroundColor:red">
-      111<svg-icon icon-name="icon_reset" />111
-    </div>
     <el-form
       ref="fromRef"
       :model="patientData"
