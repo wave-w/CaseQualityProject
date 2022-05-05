@@ -5,6 +5,10 @@
       v-loading="!isHasDraw"
       class="iamge_box"
     />
+    <div class="switch_box">
+      <span class="iconfont icon-bofang last_btn disabled_class" @click="$emit('toLastImage')" />
+      <span class="iconfont icon-bofang" @click="$emit('toNextImage')" />
+    </div>
     <div v-show="isHasDraw" class="btn_list">
       <div
         v-for="item in MeasureTools.basicsTools"
@@ -66,6 +70,7 @@ import MeasureTools from '../../assets/js/MeasureTools';
 
 export default defineComponent({
   name: 'ImagingViewer',
+  emits: ['toLastImage', 'toNextImage'],
   setup() {
     const imagingViewer = new ImagingViewer();
     const imageBox = ref(null);
@@ -141,6 +146,7 @@ export default defineComponent({
 
 <style scoped lang='scss'>
 .main {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -151,6 +157,25 @@ export default defineComponent({
   .iamge_box {
     height: 700px;
     width: 800px;
+  }
+  .switch_box {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    bottom: 100px;
+    span {
+      font-size: 35px;
+      cursor: pointer;
+      margin: 0 10px;
+      color: #fff;
+    }
+    .last_btn {
+      transform: rotateY(180deg);
+    }
+    span:hover {
+      color: #409eff;
+    }
   }
   .btn_list {
     display: flex;
@@ -172,13 +197,6 @@ export default defineComponent({
     div:hover {
       color: #409eff;
     }
-    .activeClass {
-      color: #409eff;
-    }
-    .disabled_class {
-      pointer-events: none;
-      color: #7b7b7b;
-    }
     :deep(.el-dropdown-link) {
       color: #fff;
       font-size: 16px;
@@ -192,5 +210,12 @@ export default defineComponent({
       }
     }
   }
+  .activeClass {
+      color: #409eff !important;
+    }
+  .disabled_class {
+      pointer-events: none;
+      color: #7b7b7b !important;
+    }
 }
 </style>
