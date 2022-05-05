@@ -1,129 +1,129 @@
-import i18n from '@/assets/lang/index';
-
 const MeasureTools = {
   basicsTools: [
     // mode:工具支持的图像模式 [1: 2D, 2: M, 3: CW/PW], 工具没定义mode代表是DICOM图像通用工具
     {
-      name: i18n.t('imagingViewer.distance'),
+      mode: [1],
+      name: '距离',
       value: 'Length',
       function: 'activeLengthTool',
-      icon: 'icon_distance'
-    },
-    {
-      name: i18n.t('imagingViewer.area'),
-      value: 'EllipticalRoi',
-      function: 'activeEllipticalRoiTool',
-      icon: 'icon_area'
-    },
-    {
-      name: i18n.t('imagingViewer.angle'),
-      value: 'Angle',
-      function: 'activeAngleTool',
-      icon: 'icon_angle'
-    },
-    {
-      name: i18n.t('imagingViewer.cobbAngle'),
-      value: 'CobbAngle',
-      function: 'activeCobbAngleTool',
-      icon: 'icon_cobbAngle'
-    },
-    {
-      mode: [2, 3],
-      name: i18n.t('imagingViewer.time'),
-      value: 'Time',
-      function: 'activeTimeTool',
-      icon: 'icon_time'
-    },
-    {
-      mode: [2],
-      name: i18n.t('imagingViewer.mDistance'),
-      value: 'MLength',
-      function: 'activeMLengthTool',
-      icon: 'icon_distance'
-    },
-    {
-      mode: [3],
-      name: i18n.t('imagingViewer.vlocity'),
-      value: 'Velocity',
-      function: 'activeVelocityTool',
-      icon: 'icon_vlocity'
-    },
-    {
-      mode: [2, 3],
-      name: i18n.t('imagingViewer.heartRate'),
-      value: 'HeartRate',
-      function: 'activeHeartRateTool',
-      icon: 'icon_heartRate'
-    },
-    {
-      name: i18n.t('imagingViewer.arrowAnnotate'),
-      value: 'ArrowAnnotate',
-      function: 'arrowAnnotateTool',
-      icon: 'icon_arrowAnnotate'
-    },
-    {
-      name: i18n.t('imagingViewer.sketch'),
-      value: 'Sketch',
-      function: 'activeSketchTool',
-      icon: 'icon_sketch'
+      icon: 'icon-gudingchangduhuizhixian',
     },
     {
       mode: [1],
-      name: i18n.t('imagingViewer.freehand'),
+      name: '面积',
+      value: 'EllipticalRoi',
+      function: 'activeEllipticalRoiTool',
+      icon: 'icon-xietuoyuan',
+    },
+    {
+      name: '角度',
+      value: 'Angle',
+      function: 'activeAngleTool',
+      icon: 'icon-xuanzhuanjiaodu',
+    },
+    {
+      name: 'Cobb角',
+      value: 'CobbAngle',
+      function: 'activeCobbAngleTool',
+      icon: 'icon-jurassic_nishiz-angle',
+    },
+    {
+      mode: [2, 3],
+      name: '时间',
+      value: 'Time',
+      function: 'activeTimeTool',
+      icon: 'icon-shijian',
+    },
+    {
+      mode: [2],
+      name: '距离(M)',
+      value: 'MLength',
+      function: 'activeMLengthTool',
+      icon: 'icon-gudingchangduhuizhixian',
+    },
+    {
+      mode: [3],
+      name: '速度',
+      value: 'Velocity',
+      function: 'activeVelocityTool',
+      icon: 'icon-sudu',
+    },
+    {
+      mode: [2, 3],
+      name: '心率',
+      value: 'HeartRate',
+      function: 'activeHeartRateTool',
+      icon: 'icon-xinshuai',
+    },
+    {
+      name: '箭头文字',
+      value: 'ArrowAnnotate',
+      function: 'arrowAnnotateTool',
+      icon: 'icon-biaojidian',
+    },
+    {
+      name: '勾画',
+      value: 'Sketch',
+      function: 'activeSketchTool',
+      icon: 'icon-radiobuttonselect',
+    },
+    {
+      mode: [1],
+      name: '钢笔',
       value: 'FreehandRoi',
       function: 'activeFreehandRoiTool',
-      icon: 'icon_freehand'
+      icon: 'icon-gangbi',
     },
     {
-      name: i18n.t('imagingViewer.zoom'),
+      name: '缩放',
       value: 'Zoom',
       function: 'activeZoomTool',
-      icon: 'icon_zoom'
+      icon: 'icon-suofang',
     },
     {
-      name: i18n.t('imagingViewer.rotate'),
+      name: '旋转',
       value: 'Rotate',
-      icon: 'icon_rotate',
+      icon: 'icon-xuanzhuan',
       children: [
         {
-          name: i18n.t('imagingViewer.flipHorizontal'),
+          name: '左右翻转',
           value: 'LeftRightFlip',
           function: 'leftRightFlip',
-          icon: 'icon_flipHorizontal'
+          icon: 'icon-a-zujian791',
         },
         {
-          name: i18n.t('imagingViewer.flipVertically'),
+          name: '上下翻转',
           value: 'UpsideDownFlip',
           function: 'upsideDownFlip',
-          icon: 'icon_flipVertically'
+          icon: 'icon-a-zujian781',
         },
         {
-          name: i18n.t('imagingViewer.clockwiseRotate'),
+          name: '正时针旋转',
           value: 'ClockwiseRotate',
           function: 'clockwiseRotate',
-          icon: 'icon_clockwiseRotate'
+          icon: 'icon-a-zujian8211',
         },
         {
-          name: i18n.t('imagingViewer.antiClockwiseRotate'),
+          name: '逆时针旋转',
           value: 'AntiClockwiseRotate',
           function: 'antiClockwiseRotate',
-          icon: 'icon_antiClockwiseRotate'
-        }
-      ]
+          icon: 'icon-a-zujian8311',
+        },
+      ],
     },
     {
-      name: i18n.t('imagingViewer.pan'),
+      name: '拖动',
       value: 'Pan',
       function: 'activePanTool',
-      icon: 'icon_pan'
+      icon: 'icon-move',
     },
     {
-      name: i18n.t('imagingViewer.magnify'),
+      name: '透镜',
       value: 'Magnify',
       function: 'activeMagnifyTool',
-      icon: 'icon_magnify'
-    }
-  ]
+      icon: 'icon-quanshenjing',
+    },
+  ],
 };
 
 export default MeasureTools;
