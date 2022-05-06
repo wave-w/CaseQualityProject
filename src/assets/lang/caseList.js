@@ -12,6 +12,8 @@ const caseList = {
     inspectionDoctor: '检查医生',
     ultrasonic_diagnosis: '超声诊断',
     ultrasonic_findings: '超声所见',
+    image_list: '超声图像列表',
+    ultrasonic_image: '超声图像',
   },
   en: {
     inspectionNum: 'InspectionNum',
@@ -26,6 +28,8 @@ const caseList = {
     inspectionDoctor: 'InspectionDoctor',
     ultrasonic_diagnosis: 'Ultrasonic Diagnosis',
     ultrasonic_findings: 'Ultrasonic Findings',
+    image_list: 'Ultrasonic Image List',
+    ultrasonic_image: 'Ultrasonic Image',
   },
 };
 

@@ -10,7 +10,18 @@
           :label="`${item.label}:`"
           :span="item.span"
         >
-          {{ patientData[item.prop] }}
+          <span v-if="!item.isImagelist">{{ patientData[item.prop] }}</span>
+          <div v-else class="image_list">
+            <div
+              v-for="(imageUrl, index) in patientData[item.prop]"
+              :key="index"
+              class="image_box"
+              @dblclick="showImagingViewer"
+            >
+              <img :src="imageUrl">
+              <div>{{ $t('caseList.ultrasonic_image') }}{{ index + 1 }}</div>
+            </div>
+          </div>
         </el-descriptions-item>
       </el-descriptions>
     </el-card>
@@ -81,6 +92,12 @@ export default defineComponent({
         label: t('caseList.nativePlace'),
       },
       {
+        prop: 'image_list',
+        label: t('caseList.image_list'),
+        isImagelist: true,
+        span: 2,
+      },
+      {
         prop: 'ultrasonic_diagnosis',
         label: t('caseList.ultrasonic_diagnosis'),
         span: 2,
@@ -90,10 +107,10 @@ export default defineComponent({
         label: t('caseList.ultrasonic_findings'),
         span: 2,
       },
-
     ]);
     const patientData = ref({});
-    function toGetDiagnosedPatientDetail() {
+
+    const toGetDiagnosedPatientDetail = () => {
       getDiagnosedPatientDetail(route.params.id, route.params.type).then((res) => {
         patientData.value = {
           ...res.data,
@@ -102,13 +119,17 @@ export default defineComponent({
           inspectionDate: formatDate(res.data.inspectionDate),
         };
       });
-    }
+    };
+    const showImagingViewer = () => {
+      console.log('showImagingViewer');
+    };
+
     onMounted(() => {
       toGetDiagnosedPatientDetail();
     });
 
     return {
-      patientTitle, patientData,
+      patientTitle, patientData, showImagingViewer,
     };
   },
 });
@@ -117,5 +138,33 @@ export default defineComponent({
 <style lang="scss"  scoped>
 .card {
   margin: 20px;
+  .image_list {
+    display: flex;
+    overflow: hidden;
+    overflow-y: auto;
+    flex-wrap: wrap;
+    max-height: 300px;
+    max-width: 1260px;
+    margin: 10px 20px;
+    border: 1px solid #eee;
+    .image_box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 210px;
+      width: 200px;
+      padding: 10px 5px;
+      cursor: pointer;
+      img {
+        height: 200px;
+        width: 200px;
+      }
+    }
+    .image_box:hover {
+        background: #66a6ff;
+      }
+  }
+  .image_list::-webkit-scrollbar { display: none; }
+
 }
 </style>
