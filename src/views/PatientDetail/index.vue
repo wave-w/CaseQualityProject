@@ -16,7 +16,7 @@
               v-for="(imageUrl, index) in patientData[item.prop]"
               :key="index"
               class="image_box"
-              @dblclick="showImagingViewer"
+              @dblclick="showImagingViewer(index)"
             >
               <img :src="imageUrl">
               <div>{{ $t('caseList.ultrasonic_image') }}{{ index + 1 }}</div>
@@ -25,6 +25,13 @@
         </el-descriptions-item>
       </el-descriptions>
     </el-card>
+    <image-viewer-dialog
+      v-if="imageDialogVisible"
+      :image-list="patientData.image_list"
+      :active-index="activeIndex"
+      class="image_dialog"
+      @image-dialog-close="imageDialogClose"
+    />
   </div>
 </template>
 
@@ -34,9 +41,11 @@ import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { getDiagnosedPatientDetail } from '../../api/patientList/index';
 import formatDate from '../../utils/formatDate';
+import ImageViewerDialog from '../../components/ImageViewerDialog/index.vue';
 
 export default defineComponent({
   name: 'PatientDetail',
+  components: { ImageViewerDialog },
   setup() {
     const route = useRoute();
     const { t } = useI18n();
@@ -109,6 +118,8 @@ export default defineComponent({
       },
     ]);
     const patientData = ref({});
+    const imageDialogVisible = ref(false);
+    const activeIndex = ref(-1);
 
     const toGetDiagnosedPatientDetail = () => {
       getDiagnosedPatientDetail(route.params.id, route.params.type).then((res) => {
@@ -120,8 +131,12 @@ export default defineComponent({
         };
       });
     };
-    const showImagingViewer = () => {
-      console.log('showImagingViewer');
+    const showImagingViewer = (index) => {
+      activeIndex.value = index;
+      imageDialogVisible.value = true;
+    };
+    const imageDialogClose = () => {
+      imageDialogVisible.value = false;
     };
 
     onMounted(() => {
@@ -129,7 +144,7 @@ export default defineComponent({
     });
 
     return {
-      patientTitle, patientData, showImagingViewer,
+      patientTitle, patientData, imageDialogVisible, activeIndex, showImagingViewer, imageDialogClose,
     };
   },
 });
@@ -165,6 +180,10 @@ export default defineComponent({
       }
   }
   .image_list::-webkit-scrollbar { display: none; }
-
+}
+.image_dialog {
+  position: absolute;
+  z-index: 99;
+  top: 100px;
 }
 </style>

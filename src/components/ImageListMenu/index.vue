@@ -3,7 +3,7 @@
     <div
       v-for="(url, index) in imageList"
       :key="index"
-      class="image_box"
+      :class="['image_box', index === activeIndex ? 'active_class' : '']"
       @click="$emit('selectImage', index)"
     >
       <img :src="url">
@@ -22,6 +22,10 @@ export default defineComponent({
       type: Array,
       default: () => [],
     },
+    activeIndex: {
+      type: Number,
+      default: -1,
+    },
   },
   emits: ['selectImage'],
 });
@@ -35,7 +39,6 @@ export default defineComponent({
   height: 750px !important;
   overflow: hidden;
   overflow-y: auto;
-  border: 1px solid #eee;
   background: #000;
   .image_box {
     display: flex;
@@ -52,6 +55,9 @@ export default defineComponent({
     }
   }
   .image_box:hover {
+    color: #e90f0f;
+  }
+  .active_class {
     color: #e90f0f;
   }
 }

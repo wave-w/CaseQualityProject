@@ -6,8 +6,19 @@
       class="iamge_box"
     />
     <div class="switch_box">
-      <span class="iconfont icon-bofang last_btn disabled_class" @click="$emit('toLastImage')" />
-      <span class="iconfont icon-bofang" @click="$emit('toNextImage')" />
+      <span
+        :class="[
+          'iconfont icon-bofang last_btn',
+          isHasPreviousImage ? '' : 'disabled_class']"
+        @click="$emit('toLastImage')"
+      />
+      <span
+        :class="[
+          'iconfont icon-bofang',
+          isHasNextImage ? '' : 'disabled_class'
+        ]"
+        @click="$emit('toNextImage')"
+      />
     </div>
     <div v-show="isHasDraw" class="btn_list">
       <div
@@ -63,15 +74,31 @@
 </template>
 
 <script>
-import { defineComponent, onMounted, ref } from 'vue';
+import {
+  defineComponent, onMounted, ref, watch,
+} from 'vue';
 import { ElMessageBox } from 'element-plus';
 import ImagingViewer from '../../assets/js/ImagingViewer';
 import MeasureTools from '../../assets/js/MeasureTools';
 
 export default defineComponent({
   name: 'ImagingViewer',
+  props: {
+    imageUrl: {
+      type: String,
+      default: '',
+    },
+    isHasPreviousImage: {
+      type: Boolean,
+      default: false,
+    },
+    isHasNextImage: {
+      type: Boolean,
+      default: false,
+    },
+  },
   emits: ['toLastImage', 'toNextImage'],
-  setup() {
+  setup(props) {
     const imagingViewer = new ImagingViewer();
     const imageBox = ref(null);
     const imageMode = ref([]);
@@ -79,14 +106,12 @@ export default defineComponent({
     const isHasDraw = ref(false);
     const isDroped = ref(false);
 
-    onMounted(() => {
-      imagingViewer.init(imageBox.value);
-      imagingViewer.drawImage('https://s3.cn-north-1.amazonaws.com.cn/wisonic-dev/image/20211201/png/62bd9dcf090e46b79fa010f113f908ec.dcm').then(() => {
+    const drawImage = (imageId) => {
+      imagingViewer.drawImage(imageId).then(() => {
         imageMode.value = imagingViewer.getImageMode();
         isHasDraw.value = true;
       });
-    });
-
+    };
     const openAnnotateToolinputBox = (text) => {
       ElMessageBox.prompt('备注', {
         closeOnClickModal: false,
@@ -129,6 +154,18 @@ export default defineComponent({
       isDroped.value = isDrop;
     };
 
+    onMounted(() => {
+      imagingViewer.init(imageBox.value);
+    });
+
+    watch(() => props.imageUrl, (val) => {
+      if (val) {
+        drawImage(val);
+      }
+    }, {
+      immediate: true,
+    });
+
     return {
       imageBox,
       MeasureTools,
@@ -152,7 +189,6 @@ export default defineComponent({
   align-items: center;
   height: 750px;
   width: 1000px;
-  margin: 0 20px;
   background: #000;
   .iamge_box {
     height: 700px;
