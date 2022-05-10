@@ -10,7 +10,19 @@
           :label="`${item.label}:`"
           :span="item.span"
         >
-          <span v-if="!item.isImagelist">{{ patientData[item.prop] }}</span>
+          <span v-if="!item.isImagelist">
+            <el-input
+              v-if="item.editable"
+              v-model="ultrasonicInfo[item.prop]"
+              type="textarea"
+              resize="none"
+              :autosize="{
+                minRows: 1, maxRows: 6
+              }"
+              @blur="saveText(item.prop)"
+            />
+            <span v-else>{{ patientData[item.prop] }}</span>
+          </span>
           <div v-else class="image_list">
             <div
               v-for="(imageUrl, index) in patientData[item.prop]"
@@ -110,14 +122,20 @@ export default defineComponent({
         prop: 'ultrasonic_diagnosis',
         label: t('caseList.ultrasonic_diagnosis'),
         span: 2,
+        editable: true,
       },
       {
         prop: 'ultrasonic_findings',
         label: t('caseList.ultrasonic_findings'),
         span: 2,
+        editable: true,
       },
     ]);
     const patientData = ref({});
+    const ultrasonicInfo = ref({
+      ultrasonic_diagnosis: '',
+      ultrasonic_findings: '',
+    });
     const imageDialogVisible = ref(false);
     const activeIndex = ref(-1);
 
@@ -129,6 +147,10 @@ export default defineComponent({
           patientBirthDate: formatDate(res.data.patientBirthDate).slice(0, 10),
           inspectionDate: formatDate(res.data.inspectionDate),
         };
+        ultrasonicInfo.value = {
+          ultrasonic_diagnosis: res.data.ultrasonic_diagnosis.replace(/[\s*,\r\n]/g, ''),
+          ultrasonic_findings: res.data.ultrasonic_findings.replace(/[\s*,\r\n]/g, ''),
+        };
       });
     };
     const showImagingViewer = (index) => {
@@ -138,13 +160,24 @@ export default defineComponent({
     const imageDialogClose = () => {
       imageDialogVisible.value = false;
     };
+    const saveText = (props) => {
+      console.log(props);
+      console.log(ultrasonicInfo.value);
+    };
 
     onMounted(() => {
       toGetDiagnosedPatientDetail();
     });
 
     return {
-      patientTitle, patientData, imageDialogVisible, activeIndex, showImagingViewer, imageDialogClose,
+      patientTitle,
+      patientData,
+      imageDialogVisible,
+      activeIndex,
+      ultrasonicInfo,
+      showImagingViewer,
+      imageDialogClose,
+      saveText,
     };
   },
 });
