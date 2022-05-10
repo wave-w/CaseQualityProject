@@ -19,7 +19,7 @@
               :autosize="{
                 minRows: 1, maxRows: 6
               }"
-              @blur="saveText(item.prop)"
+              @blur="saveText"
             />
             <span v-else>{{ patientData[item.prop] }}</span>
           </span>
@@ -51,7 +51,8 @@
 import { defineComponent, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { getDiagnosedPatientDetail } from '../../api/patientList/index';
+import { ElMessageBox, ElMessage } from 'element-plus';
+import { getDiagnosedPatientDetail, updateUltrasonicText } from '../../api/patientList/index';
 import formatDate from '../../utils/formatDate';
 import ImageViewerDialog from '../../components/ImageViewerDialog/index.vue';
 
@@ -148,6 +149,7 @@ export default defineComponent({
           inspectionDate: formatDate(res.data.inspectionDate),
         };
         ultrasonicInfo.value = {
+          inspectionNum: res.data.inspectionNum,
           ultrasonic_diagnosis: res.data.ultrasonic_diagnosis.replace(/[\s*,\r\n]/g, ''),
           ultrasonic_findings: res.data.ultrasonic_findings.replace(/[\s*,\r\n]/g, ''),
         };
@@ -160,9 +162,40 @@ export default defineComponent({
     const imageDialogClose = () => {
       imageDialogVisible.value = false;
     };
-    const saveText = (props) => {
-      console.log(props);
-      console.log(ultrasonicInfo.value);
+    const saveText = () => {
+      ElMessageBox.confirm('确认修改?', '提示', {
+        confirmButtonText: '修改',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }).then(async () => {
+        const success = await updateUltrasonicText(
+          ultrasonicInfo.value.inspectionNum,
+          ultrasonicInfo.value.ultrasonic_diagnosis,
+          ultrasonicInfo.value.ultrasonic_findings,
+        );
+        if (success) {
+          ElMessage({
+            message: '修改成功',
+            type: 'success',
+          });
+          return;
+        }
+        ultrasonicInfo.value = {
+          inspectionNum: patientData.value.inspectionNum,
+          ultrasonic_diagnosis: patientData.value.ultrasonic_diagnosis.replace(/[\s*,\r\n]/g, ''),
+          ultrasonic_findings: patientData.value.ultrasonic_findings.replace(/[\s*,\r\n]/g, ''),
+        };
+        ElMessage({
+          message: '修改失败,请重试!',
+          type: 'error',
+        });
+      }).catch(() => {
+        ultrasonicInfo.value = {
+          inspectionNum: patientData.value.inspectionNum,
+          ultrasonic_diagnosis: patientData.value.ultrasonic_diagnosis.replace(/[\s*,\r\n]/g, ''),
+          ultrasonic_findings: patientData.value.ultrasonic_findings.replace(/[\s*,\r\n]/g, ''),
+        };
+      });
     };
 
     onMounted(() => {

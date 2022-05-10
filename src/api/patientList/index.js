@@ -30,3 +30,15 @@ export function getDiagnosedPatientDetail(id, type) {
     },
   });
 }
+
+export function updateUltrasonicText(inspectionNum, ultrasonicDiagnosis, ultrasonicDindings) {
+  return request({
+    url: '/updateUltrasonic',
+    method: 'POST',
+    params: {
+      inspectionNum,
+      ultrasonicDiagnosis,
+      ultrasonicDindings,
+    },
+  });
+}
