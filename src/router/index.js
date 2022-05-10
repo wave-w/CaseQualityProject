@@ -9,7 +9,7 @@ const routes = [
   },
   {
     path: '/home',
-    name: HTMLModElement,
+    name: 'Home',
     component: () => import('../views/Home/index.vue'),
     children: [
       {
@@ -31,6 +31,11 @@ const routes = [
         path: '/patientDetail/:type/:id',
         name: 'patientDetail',
         component: () => import('../views/PatientDetail/index.vue'),
+      },
+      {
+        path: '/personal',
+        name: 'Personal',
+        component: () => import('../views/Personal/index.vue'),
       },
     ],
   },

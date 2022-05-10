@@ -28,9 +28,9 @@
         </el-menu-item>
       </el-menu-item-group>
     </el-sub-menu>
-    <el-menu-item index="/statistics">
-      <i class="iconfont icon-bingli1" />
-      <span>{{ $t('global.statistics') }}</span>
+    <el-menu-item index="/personal">
+      <i class="iconfont icon-geren" />
+      <span>{{ $t('global.personal') }}</span>
     </el-menu-item>
   </el-menu>
 </template>
